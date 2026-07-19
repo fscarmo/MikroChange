@@ -1,5 +1,6 @@
 ﻿namespace MikroChange.Infra.Persistence;
 
+
 /// <summary>
 /// Centraliza os caminhos de armazenamento local usados pelo programa.
 /// Os dados ficam em %LocalAppData%\MikroTikPasswordChanger, atrelados ao usuário do Windows.
