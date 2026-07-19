@@ -80,24 +80,19 @@ public static class DpapiProtector
                 CbData = Entropy.Length,
                 PbData = entropyHandle.AddrOfPinnedObject()
             };
-
-            bool success;
-            DataBlob dataOut;
-
-            if (protect)
-            {
-                success = CryptProtectData(
+            
+            bool success = protect
+                
+                ? CryptProtectData(
                     ref dataIn,
-                    "MikroTikPasswordChanger",
+                    "MikroChange",
                     ref entropyBlob,
                     IntPtr.Zero,
                     IntPtr.Zero,
                     CryptProtectUiForbidden,
-                    out dataOut);
-            }
-            else
-            {
-                success = CryptUnprotectData(
+                    out DataBlob dataOut)
+
+                : CryptUnprotectData(
                     ref dataIn,
                     IntPtr.Zero,
                     ref entropyBlob,
@@ -105,7 +100,6 @@ public static class DpapiProtector
                     IntPtr.Zero,
                     CryptProtectUiForbidden,
                     out dataOut);
-            }
 
             if (!success)
             {
