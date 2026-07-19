@@ -55,29 +55,16 @@ localmente de forma criptografada.
 Pré-requisitos: SDK do .NET 10 instalado no Windows
 (https://dotnet.microsoft.com/pt-br/download/dotnet/10.0).
  
-```
-cd MikroChange
-dotnet build -c Release
-```
  
 Para gerar um único .exe (self-contained, não precisa de .NET instalado na máquina
 de destino):
- 
+
 ```
-dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true
+dotnet publish MikroChange.UI/MikroChange.UI.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:DebugType=none
 ```
- 
+
 O executável final ficará em:
-`bin\Release\net10.0-windows\win-x64\publish\MikroChange.exe`
- 
-## Como rodar
- 
-```
-MikroChange.exe
-```
- 
-Na primeira execução, o programa vai pedir para cadastrar a senha master.
-Nas próximas execuções, ele vai pedir a senha master antes de liberar o menu.
+`MikroChange\MikroChange.UI\bin\Release\net10.0\win-x64\publish\MikroChange.exe`
 
 
 ## Onde os dados ficam salvos?
