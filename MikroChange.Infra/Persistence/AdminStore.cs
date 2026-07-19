@@ -10,12 +10,12 @@ namespace MikroChange.Infra.Persistence;
 /// <summary>
 /// Persiste a credencial de admin usada para acessar os MikroTiks, protegida via DPAPI.
 /// </summary>
-public static class AdminCredentialStore
+public static class AdminStore
 {
     public static bool Exists() => File.Exists(Paths.AdminCredentialFile);
 
 
-    public static void Save(AdminCredential credential)
+    public static void Save(Admin credential)
     {
         var json = JsonSerializer.Serialize(credential);
         var plainBytes = Encoding.UTF8.GetBytes(json);
@@ -25,7 +25,7 @@ public static class AdminCredentialStore
     }
 
 
-    public static AdminCredential? Load()
+    public static Admin? Load()
     {
         if (!Exists())
         {
@@ -36,6 +36,6 @@ public static class AdminCredentialStore
         var plainBytes = DpapiProtector.Unprotect(protectedBytes);
         var json = Encoding.UTF8.GetString(plainBytes);
 
-        return JsonSerializer.Deserialize<AdminCredential>(json);
+        return JsonSerializer.Deserialize<Admin>(json);
     }
 }
