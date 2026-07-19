@@ -1,0 +1,43 @@
+## Built-in .NET build outputs and binaries
+[Bb]in/
+[Oo]bj/
+[Log]s/
+
+## Visual Studio cache, settings, and runtime state
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## JetBrains Rider / ReSharper files
+.idea/
+*.sln.DotSettings.user
+
+## Visual Studio Code workspace settings
+.vscode/
+!.vscode/extensions.json
+
+## Source Control and Package manager files
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+
+## Test and Code Coverage metrics
+TestResults/
+*.clog
+*.coverage
+*.coveragexml
+
+## Application local secrets (e.g., development configuration overrides)
+appsettings.Development.json
+secrets.json
+
+## Operating System temporary structures
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store

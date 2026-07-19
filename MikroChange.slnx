@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="MikroChange.Application/MikroChange.Application.csproj" />
+  <Project Path="MikroChange.Core/MikroChange.Core.csproj" />
+  <Project Path="MikroChange.Infra/MikroChange.Infra.csproj" />
+  <Project Path="MikroChange.UI/MikroChange.UI.csproj" />
+</Solution>
