@@ -82,7 +82,7 @@ public class AppMikroChange(
             Console.WriteLine("3 - Cadastrar novo dispositivo");
             Console.WriteLine("4 - Remover dispositivo");
             Console.WriteLine("5 - Listar dispositivos");
-            Console.WriteLine("6 - Executar alteração");
+            Console.WriteLine("6 - Executar alteração em massa");
             Console.WriteLine("0 - Sair");
             Console.Write("\nEscolha uma opção: ");
 

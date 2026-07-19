@@ -12,7 +12,8 @@ public class RegisterAdmin(IAuthService authService)
 
     public void Execute()
     {
-        Console.WriteLine("=== Cadastrar usuário admin (usado para acessar os MikroTiks) ===");
+        Console.Clear();
+        Console.WriteLine("=== Cadastrar/Alterar usuário admin (usado para acessar os MikroTiks) ===\n");
 
         if (_authService.HasAdmin())
         {

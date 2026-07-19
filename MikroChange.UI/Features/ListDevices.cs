@@ -11,7 +11,8 @@ public class ListDevices(IDeviceService deviceService)
 
     public void Execute()
     {
-        Console.WriteLine("=== Dispositivos cadastrados ===");
+        Console.Clear();
+        Console.WriteLine("=== Dispositivos cadastrados ===\n");
         var devices = _deviceService.GetAllDevices();
 
         if (devices.Count == 0)

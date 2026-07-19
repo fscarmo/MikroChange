@@ -13,7 +13,8 @@ public class RemoveDevice(IDeviceService deviceService)
 
     public void Execute()
     {
-        Console.WriteLine("=== Remover dispositivo ===");
+        Console.Clear();
+        Console.WriteLine("=== Remover dispositivo ===\n");
         var ip = ConsoleHelper.ReadNonEmpty("IP do dispositivo a remover: ");
 
         var result = _deviceService.RemoveByIp(ip);

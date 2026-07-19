@@ -12,7 +12,8 @@ public class ChangeMasterPassword(IAuthService authService)
 
     public void Execute()
     {
-        Console.WriteLine("=== Mudar senha master ===");
+        Console.Clear();
+        Console.WriteLine("=== Alterar senha master do MikroChange ===");
         var current = ConsoleHelper.ReadPassword("Senha master atual: ");
 
         if (!_authService.VerifyMasterPassword(current))

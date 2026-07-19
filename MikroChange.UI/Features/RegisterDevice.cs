@@ -14,7 +14,8 @@ public class RegisterDevice(IDeviceService deviceService)
 
     public void Execute()
     {
-        Console.WriteLine("=== Cadastrar novo dispositivo ===");
+        Console.Clear();
+        Console.WriteLine("=== Cadastrar novo dispositivo ===\n");
 
         var ip = ConsoleHelper.ReadNonEmpty("IP do dispositivo: ");
         if (!IPAddress.TryParse(ip, out _))

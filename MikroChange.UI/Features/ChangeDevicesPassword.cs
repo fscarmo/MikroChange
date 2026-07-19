@@ -19,7 +19,8 @@ public class ChangeDevicesPassword(
 
     public void Execute()
     {
-        Console.WriteLine("=== Executar alteração de senha ===");
+        Console.Clear();
+        Console.WriteLine("=== Executar alteração em massa ===\n");
 
         if (!_authService.HasAdmin())
         {
