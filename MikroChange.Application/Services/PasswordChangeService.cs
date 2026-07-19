@@ -8,6 +8,11 @@ using MikroChange.Infra.MikroTik.Clients;
 namespace MikroChange.Application.Services;
 
 
+/// <summary>
+/// Orquestra a alteração de senha de um usuário em vários MikroTiks, um de cada vez.
+/// Traduz falhas de conexão / autenticação / comando em um resultado por dispositivo,
+/// para que a camada de UI possa reportar sucesso/erro individualmente sem interromper o lote.
+/// </summary>
 public class PasswordChangeService : IPasswordChangeService
 {
     public IEnumerable<Change> ExecuteChange(
