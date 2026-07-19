@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MikroChange.Core\MikroChange.Core.csproj" />
+    <ProjectReference Include="..\MikroChange.Infra\MikroChange.Infra.csproj" />
+  </ItemGroup>
+
 </Project>
