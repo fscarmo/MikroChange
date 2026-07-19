@@ -21,4 +21,8 @@
 		</None>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\MikroChange.Core\MikroChange.Core.csproj" />
+	</ItemGroup>
+
 </Project>
