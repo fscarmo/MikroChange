@@ -1,0 +1,62 @@
+﻿using MikroChange.Core.Enums;
+using MikroChange.Core.Exceptions;
+using MikroChange.Core.Models;
+using MikroChange.Core.Services;
+using MikroChange.Infra.MikroTik.Clients;
+
+
+namespace MikroChange.Application.Services;
+
+
+public class PasswordChangeService : IPasswordChangeService
+{
+    public IEnumerable<Change> ExecuteChange(
+        IEnumerable<Device> devices,
+        Admin deviceAdminAccess,
+        string targetUsername,
+        string newPassword)
+    {
+        foreach (var device in devices)
+        {
+            yield return ChangeOnDevice(device, deviceAdminAccess, targetUsername, newPassword);
+        }
+    }
+
+
+    private static Change ChangeOnDevice(
+        Device targetDeviceToChange,
+        Admin deviceAdminAccess,
+        string targetUsername,
+        string newPassword)
+    {
+        using var client = new MikroTikApiClient();
+        try
+        {
+            client.Connect(targetDeviceToChange.Ip);
+        }
+        catch (MikroTikException e)
+        {
+            return new Change(targetDeviceToChange, ChangeStatus.ConnectionFailed, e.Message);
+        }
+
+        try
+        {
+            client.ExecuteLogin(deviceAdminAccess.Username, deviceAdminAccess.Password);
+        }
+        catch (MikroTikException e)
+        {
+            return new Change(targetDeviceToChange, ChangeStatus.AuthFailed, e.Message);
+        }
+
+        try
+        {
+            client.SetUserPassword(targetUsername, newPassword);
+        }
+        catch (MikroTikException e)
+        {
+            return new Change(targetDeviceToChange, ChangeStatus.CommandFailed, e.Message);
+        }
+
+        return new Change(targetDeviceToChange, ChangeStatus.Success, null);
+    }
+}
