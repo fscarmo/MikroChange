@@ -1,4 +1,4 @@
-﻿namespace MikroChange.Infra;
+﻿namespace MikroChange.Infra.Persistence;
 
 /// <summary>
 /// Centraliza os caminhos de armazenamento local usados pelo programa.
