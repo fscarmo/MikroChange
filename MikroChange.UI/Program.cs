@@ -1,10 +1,26 @@
-﻿namespace MikroChange.UI
+﻿using MikroChange.Application.Services;
+using MikroChange.Core.Services;
+
+
+namespace MikroChange.UI;
+
+
+public class Program
 {
-    internal class Program
+    private static readonly IAuthService _authService = new AuthService();
+    private static readonly IDeviceService _deviceService = new DeviceService();
+    private static readonly IPasswordChangeService passwordChangeService = new PasswordChangeService();
+
+
+
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
+        if (args.Length > 0)
         {
-            Console.WriteLine("Hello, World!");
+            Console.WriteLine($"Nenhum argumento esperado, {args.Length} argumento(s) obtido(s).");
         }
+
+        var app = new AppMikroChange(_authService, _deviceService, passwordChangeService);
+        app.Run();
     }
 }
