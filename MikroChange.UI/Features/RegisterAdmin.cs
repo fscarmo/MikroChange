@@ -5,7 +5,7 @@ using MikroChange.UI.Helpers;
 namespace MikroChange.UI.Features;
 
 
-public class RegisterDeviceAdmin(IAuthService authService)
+public class RegisterAdmin(IAuthService authService)
 {
     private readonly IAuthService _authService = authService;
 
