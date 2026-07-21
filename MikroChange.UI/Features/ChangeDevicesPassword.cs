@@ -19,14 +19,14 @@ public class ChangeDevicesPassword(
 
     public void Execute()
     {
-        Console.Clear();
-        Console.WriteLine("=== Executar alteração em massa ===\n");
-
         if (!_authService.HasAdmin())
         {
             Console.WriteLine("Nenhum usuário admin cadastrado. Cadastre um usuário admin antes de continuar (opção 2).");
             return;
         }
+
+        Console.Clear();
+        Console.WriteLine("=== Executar alteração em massa ===\n");
 
         var targetDevices = _deviceService.GetAllDevices();
 
