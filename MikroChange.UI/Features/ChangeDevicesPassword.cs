@@ -81,8 +81,8 @@ public class ChangeDevicesPassword(
 
         foreach (var outcome in _passwordChangeService.ExecuteChange(targetDevices, adminDeviceAccess, targetUsername, newPassword))
         {
-            var deviceName = outcome.Device?.Name ?? "Dispositivo desconhecido";
-            var deviceAddr = outcome.Device?.Ip ?? "0.0.0.0";
+            var deviceName = outcome.Device is null ? "" : $" {outcome.Device?.Name} ";
+            var deviceAddr = outcome.Device is null ? "" : $" ({outcome.Device?.Ip}) -";
 
             switch (outcome.Status)
             {
@@ -90,35 +90,35 @@ public class ChangeDevicesPassword(
                     successCount++;
                     ConsoleHelper.PrintLine(
                         ConsoleColor.Green,
-                        $"[OK] {deviceName} ({deviceAddr}) - senha alterada com sucesso.");
+                        $"[OK]{deviceName}{deviceAddr} senha alterada com sucesso.");
                     break;
 
                 case ChangeStatus.ConnectionFailed:
                     failureCount++;
                     ConsoleHelper.PrintLine(
                         ConsoleColor.Red,
-                        $"[ERRO] {deviceName} ({deviceAddr}) - falha de conexão: {outcome.ErrorMessage}");
+                        $"[ERRO]{deviceName}{deviceAddr} falha de conexão: {outcome.ErrorMessage}");
                     break;
 
                 case ChangeStatus.AuthFailed:
                     failureCount++;
                     ConsoleHelper.PrintLine(
                         ConsoleColor.Red,
-                        $"[ERRO] {deviceName} ({deviceAddr}) - falha de autenticação: {outcome.ErrorMessage}");
+                        $"[ERRO]{deviceName}{deviceAddr} falha de autenticação: {outcome.ErrorMessage}");
                     break;
 
                 case ChangeStatus.CommandFailed:
                     failureCount++;
                     ConsoleHelper.PrintLine(
                         ConsoleColor.Red,
-                        $"[ERRO] {deviceName} ({deviceAddr}) - falha ao alterar senha: {outcome.ErrorMessage}");
+                        $"[ERRO]{deviceName}{deviceAddr} falha ao alterar senha: {outcome.ErrorMessage}");
                     break;
 
                 case ChangeStatus.ProtectedUser:
                     failureCount++;
                     ConsoleHelper.PrintLine(
                         ConsoleColor.Red,
-                        $"[ERRO] {deviceName} ({deviceAddr}) - falha na operação: {outcome.ErrorMessage}");
+                        $"[ERRO]{deviceName}{deviceAddr} falha na operação: {outcome.ErrorMessage}");
                     break;
             }
         }

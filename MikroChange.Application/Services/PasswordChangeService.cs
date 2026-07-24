@@ -26,7 +26,7 @@ public class PasswordChangeService : IPasswordChangeService
             yield return new Change(
                 ChangeStatus.ProtectedUser,
                 null,
-                $"Não é permitido alterar a senha do usuário: ${deviceAdminAccess.Username}.");
+                $"Não é permitido alterar a senha do usuário \"{deviceAdminAccess.Username}\".");
             yield break;
         }
 
