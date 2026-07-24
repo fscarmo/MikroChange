@@ -5,7 +5,7 @@ namespace MikroChange.Core.Models;
 
 
 public record Change(
-    Device Device,
     ChangeStatus Status,
+    Device? Device,
     string? ErrorMessage
 );

@@ -3,8 +3,9 @@
 
 public enum ChangeStatus
 {
-    Success,
-    ConnectionFailed,
     AuthFailed,
-    CommandFailed
+    CommandFailed,
+    ConnectionFailed,
+    ProtectedUser,
+    Success,
 }
