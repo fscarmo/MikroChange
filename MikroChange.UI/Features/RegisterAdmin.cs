@@ -39,7 +39,7 @@ public class RegisterAdmin(IAuthService authService)
         }
 
         var newUsername = ConsoleHelper.ReadNonEmpty("Novo usuário admin: ");
-        var newPassword = ConsoleHelper.ReadPassword("Nova senha admin: ");
+        var newPassword = ConsoleHelper.ReadPassword("Senha do novo admin: ");
 
         if (string.IsNullOrWhiteSpace(newPassword))
         {
@@ -47,7 +47,7 @@ public class RegisterAdmin(IAuthService authService)
             return;
         }
 
-        var confirmation = ConsoleHelper.ReadPassword("Confirme a nova senha admin: ");
+        var confirmation = ConsoleHelper.ReadPassword("Confirme a senha do novo admin: ");
 
         if (newPassword != confirmation)
         {
