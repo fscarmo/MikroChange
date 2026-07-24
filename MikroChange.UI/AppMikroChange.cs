@@ -78,11 +78,11 @@ public class AppMikroChange(
             Console.Clear();
             Console.WriteLine("=== MikroTik Password Changer ===\n");
             Console.WriteLine("1 - Alterar senha master do MikroChange");
-            Console.WriteLine("2 - Cadastrar/Alterar usuário admin");
-            Console.WriteLine("3 - Cadastrar novo dispositivo");
-            Console.WriteLine("4 - Remover dispositivo");
-            Console.WriteLine("5 - Listar dispositivos");
-            Console.WriteLine("6 - Executar alteração em massa");
+            Console.WriteLine("2 - Cadastrar/Alterar usuário admin dos MikroTiks");
+            Console.WriteLine("3 - Cadastrar novo dispositivo MikroTik");
+            Console.WriteLine("4 - Remover dispositivo MikroTik");
+            Console.WriteLine("5 - Listar dispositivos MikroTik");
+            Console.WriteLine("6 - Executar alteração de senha em massa");
             Console.WriteLine("0 - Sair");
             Console.Write("\nEscolha uma opção: ");
 
