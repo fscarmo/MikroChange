@@ -6,11 +6,29 @@ namespace MikroChange.UI.Helpers;
 
 public static class ConsoleHelper
 {
-    public static void PrintResultLine(ConsoleColor color, string message)
+    public static void PrintLine(ConsoleColor color, string message)
     {
         Console.ForegroundColor = color;
         Console.WriteLine(message);
         Console.ResetColor();
+    }
+
+
+    public static void PrintSuccess(string message)
+    {
+        PrintLine(ConsoleColor.Green, message);
+    }
+
+
+    public static void PrintWarning(string message)
+    {
+        PrintLine(ConsoleColor.DarkYellow, message);
+    }
+
+
+    public static void PrintError(string message)
+    {
+        PrintLine(ConsoleColor.Red, message);
     }
 
 
@@ -50,7 +68,7 @@ public static class ConsoleHelper
     }
 
 
-    public static string ReadNonEmpty(string prompt)
+    public static string ReadNonEmpty(string prompt, string? nonEmptyAlert = default)
     {
         while (true)
         {
@@ -62,7 +80,7 @@ public static class ConsoleHelper
                 return value;
             }
 
-            Console.WriteLine("O valor não pode ser vazio.");
+            PrintLine(ConsoleColor.Red, nonEmptyAlert ?? "O valor não pode ser vazio.");
         }
     }
 
@@ -71,7 +89,7 @@ public static class ConsoleHelper
     {
         Console.Write($"{prompt} (s/n): ");
         var response = Console.ReadLine()?.Trim().ToLowerInvariant();
-        return response is "s" or "sim";
+        return response is "s" or "sim" or "y" or "yes";
     }
 
 
