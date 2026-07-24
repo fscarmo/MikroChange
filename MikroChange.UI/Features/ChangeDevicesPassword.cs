@@ -113,6 +113,13 @@ public class ChangeDevicesPassword(
                         ConsoleColor.Red,
                         $"[ERRO] {deviceName} ({deviceAddr}) - falha ao alterar senha: {outcome.ErrorMessage}");
                     break;
+
+                case ChangeStatus.ProtectedUser:
+                    failureCount++;
+                    ConsoleHelper.PrintLine(
+                        ConsoleColor.Red,
+                        $"[ERRO] {deviceName} ({deviceAddr}) - falha na operação: {outcome.ErrorMessage}");
+                    break;
             }
         }
 

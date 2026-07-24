@@ -21,6 +21,15 @@ public class PasswordChangeService : IPasswordChangeService
         string targetUsername,
         string newPassword)
     {
+        if (deviceAdminAccess.Username == targetUsername)
+        {
+            yield return new Change(
+                ChangeStatus.ProtectedUser,
+                null,
+                $"Não é permitido alterar a senha do usuário: ${deviceAdminAccess.Username}.");
+            yield break;
+        }
+
         foreach (var device in devices)
         {
             yield return ChangeOnDevice(device, deviceAdminAccess, targetUsername, newPassword);
@@ -41,7 +50,7 @@ public class PasswordChangeService : IPasswordChangeService
         }
         catch (MikroTikException e)
         {
-            return new Change(targetDeviceToChange, ChangeStatus.ConnectionFailed, e.Message);
+            return new Change(ChangeStatus.ConnectionFailed, targetDeviceToChange, e.Message);
         }
 
         try
@@ -50,7 +59,7 @@ public class PasswordChangeService : IPasswordChangeService
         }
         catch (MikroTikException e)
         {
-            return new Change(targetDeviceToChange, ChangeStatus.AuthFailed, e.Message);
+            return new Change(ChangeStatus.AuthFailed, targetDeviceToChange, e.Message);
         }
 
         try
@@ -59,9 +68,9 @@ public class PasswordChangeService : IPasswordChangeService
         }
         catch (MikroTikException e)
         {
-            return new Change(targetDeviceToChange, ChangeStatus.CommandFailed, e.Message);
+            return new Change(ChangeStatus.CommandFailed, targetDeviceToChange, e.Message);
         }
 
-        return new Change(targetDeviceToChange, ChangeStatus.Success, null);
+        return new Change(ChangeStatus.Success, targetDeviceToChange, null);
     }
 }
