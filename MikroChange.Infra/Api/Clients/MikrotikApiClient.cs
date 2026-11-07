@@ -91,15 +91,50 @@ public sealed class MikroTikApiClient(int timeout = 8000) : IMikrotikClient
     {
         EnsureConnected();
 
+        var userId = FindUserId(targetUsername);
+
+        var setReply = Talk("/user/set", $"=numbers={userId}", $"=password={newPassword}");
+        ThrowIfTrap(setReply);
+    }
+
+
+    /// <summary>
+    /// Localiza o usuário pelo nome e o desabilita (/user/disable) ou habilita (/user/enable).
+    /// </summary>
+    public void SetUserDisabled(string targetUsername, bool disabled)
+    {
+        EnsureConnected();
+
+        var userId = FindUserId(targetUsername);
+
+        var command = disabled ? "/user/disable" : "/user/enable";
+        var reply = Talk(command, $"=numbers={userId}");
+        ThrowIfTrap(reply);
+    }
+
+
+    /// <summary>
+    /// Retorna o identificador interno (.id) do usuário com o nome informado.
+    /// </summary>
+    private string FindUserId(string targetUsername)
+    {
         var findReply = Talk("/user/print", $"?name={targetUsername}");
+        ThrowIfTrap(findReply);
+
         var userSentence = findReply.FirstOrDefault(s => s.Count > 0 && s[0] == "!re")
             ?? throw new MikroTikException($"Usuário '{targetUsername}' não encontrado neste MikroTik.");
 
-        var userId = ExtractWordValue(userSentence, ".id")
+        return ExtractWordValue(userSentence, ".id")
             ?? throw new MikroTikException("Não foi possível identificar o usuário neste MikroTik.");
+    }
 
-        var setReply = Talk("/user/set", $"=numbers={userId}", $"=password={newPassword}");
-        var trapSentence = setReply.FirstOrDefault(s => s.Count > 0 && s[0] == "!trap");
+
+    /// <summary>
+    /// Lança <see cref="MikroTikException"/> se a resposta contiver um "!trap" (erro retornado pelo RouterOS).
+    /// </summary>
+    private static void ThrowIfTrap(List<List<string>> reply)
+    {
+        var trapSentence = reply.FirstOrDefault(s => s.Count > 0 && s[0] == "!trap");
 
         if (trapSentence is not null)
         {

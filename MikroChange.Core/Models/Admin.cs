@@ -2,7 +2,8 @@
 
 
 /// <summary>
-/// Credencial do usuário admin usada para autenticar em todos os MikroTiks cadastrados.
+/// Credencial do usuário admin usada para autenticar nos MikroTiks. Nunca é gravada em disco:
+/// é solicitada a cada operação que altera dispositivos e descartada logo após a execução.
 /// </summary>
 public class Admin
 {

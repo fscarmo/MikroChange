@@ -8,23 +8,15 @@ namespace MikroChange.UI.Features;
 
 
 public class ChangeDevicesPassword(
-    IAuthService authService,
     IDeviceService deviceService,
     IPasswordChangeService passwordChangeService)
 {
-    private readonly IAuthService _authService = authService;
     private readonly IDeviceService _deviceService = deviceService;
     private readonly IPasswordChangeService _passwordChangeService = passwordChangeService;
 
 
     public void Execute()
     {
-        if (!_authService.HasAdmin())
-        {
-            Console.WriteLine("Nenhum usuário admin cadastrado. Cadastre um usuário admin antes de continuar (opção 2).");
-            return;
-        }
-
         Console.Clear();
         Console.WriteLine("=== Executar alteração em massa ===\n");
 
@@ -32,7 +24,7 @@ public class ChangeDevicesPassword(
 
         if (targetDevices.Count == 0)
         {
-            Console.WriteLine("Nenhum dispositivo cadastrado. Cadastre ao menos um dispositivo antes de continuar (opção 3).");
+            Console.WriteLine("Nenhum dispositivo cadastrado. Cadastre ao menos um dispositivo antes de continuar (opção 2).");
             return;
         }
 
@@ -61,12 +53,24 @@ public class ChangeDevicesPassword(
             return;
         }
 
-        var adminDeviceAccess = _authService.GetAdmin()
-            ?? throw new InvalidOperationException("Credencial admin não encontrada.");
+        var adminDeviceAccess = AdminPrompt.Read();
+
+        if (adminDeviceAccess is null)
+        {
+            Console.WriteLine("Operação cancelada.");
+            return;
+        }
 
         Console.WriteLine();
 
-        ExecuteChangeLoop(targetDevices, adminDeviceAccess, targetUsername, newPassword);
+        try
+        {
+            ExecuteChangeLoop(targetDevices, adminDeviceAccess, targetUsername, newPassword);
+        }
+        finally
+        {
+            AdminPrompt.Clear(adminDeviceAccess);
+        }
     }
 
 

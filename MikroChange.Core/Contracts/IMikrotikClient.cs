@@ -10,4 +10,7 @@ public interface IMikrotikClient : IDisposable
 
 
     public void SetUserPassword(string targetUsername, string newPassword);
+
+
+    public void SetUserDisabled(string targetUsername, bool disabled);
 }

@@ -20,7 +20,10 @@ public static class Paths
 
     public static string MasterPasswordFile => Path.Combine(RootFolder, "master.dat");
     
-    public static string AdminCredentialFile => Path.Combine(RootFolder, "admin.dat");
+    /// <summary>
+    /// Arquivo usado por versões anteriores para guardar a credencial admin. Não é mais gravado.
+    /// </summary>
+    public static string LegacyAdminCredentialFile => Path.Combine(RootFolder, "admin.dat");
     
     public static string DevicesFile => Path.Combine(RootFolder, "devices.dat");
 }
